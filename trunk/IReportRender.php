@@ -31,16 +31,18 @@ class IReportRender {
     public function __construct($ReportParser) {
         $this->RParser = $ReportParser;
 
-        if ($this->RParser->pageSetting["orientation"] == "P")
+      if ($this->RParser->pageSetting["orientation"] == "P")   
             $conf = array(
-                $this->RParser->pageSetting["pageWidth"],
-                $this->RParser->pageSetting["pageHeight"]);
-        else
-            $conf= array(
-                $this->RParser->pageSetting["pageHeight"],
-                $this->RParser->pageSetting["pageWidth"]);
-
-        $this->pdf = new _TCPDF($this->RParser->pageSetting["orientation"], 'pt', $conf);
+                (string)$this->RParser->pageSetting["pageWidth"],
+                (string)$this->RParser->pageSetting["pageHeight"]);            
+ 
+         else
+            $conf = array(
+                    (string)$this->RParser->pageSetting["pageHeight"],
+                    (string)$this->RParser->pageSetting["pageWidth"]);
+ 
+        $this->pdf = new _TCPDF($this->RParser->pageSetting["orientation"], 'px',$conf);
+		
         $this->pdf->setPrintHeader(false);
         $this->pdf->setPrintFooter(false);
     }
